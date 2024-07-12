@@ -1,6 +1,4 @@
 'use client'
-import Image from "next/image";
-import Link from "next/link";
 import { Button, Input } from "@material-tailwind/react";
 import { ImageIcons } from "@/components";
 
@@ -8,40 +6,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-dvh">
       {/* home section */}
-      <section className="w-full py-12 md:py-24 lg:py-32 flex justify-center items-center h-screen">
-        <div className="px-4 md:px-6 w-10/12">
-          <div className="grid gap-6 lg:grid-cols-[1fr_550px] lg:gap-12 xl:grid-cols-[1fr_650px]">
-            <div className="flex flex-col justify-center space-y-4">
-              <div className="space-y-2">
-                <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-7xl/none my-5">
-                  Share QR
-                </h1>
-                <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                  Share any information to a person securely with a simple QR code.
-                </p>
-              </div>
-              <div className="text-start">
-                <Button
-                  color="purple"
-                  className="w-3/12 inline-flex h-10 items-center justify-center rounded-md bg-[#6d3cbcc5] px-8 text-sm text-white shadow transition-colors hover:bg-[#6E3CBC]"
-                >
-                  Start to share
-                </Button>
-              </div>
-            </div>
-            <div className="flex flex-col items-center justify-center">
-              <Image
-                src="/qr.png"
-                width="300"
-                height="300"
-                alt="QR Code"
-                className="w-100 aspect-square overflow-hidden rounded-xl object-bottom sm:w-auto lg:order-last lg:aspect-square"
-              />
-              {/* <p className="mt-4 text-muted-foreground">Scan to learn more</p> */}
-            </div>
-          </div>
-        </div>
-      </section>
+      <Home />
       {/* about app session */}
       <section className="w-full py-12 md:py-24 lg:py-32 flex justify-center">
         <div className="w-11/12 px-4 md:px-6">
@@ -51,6 +16,7 @@ export default function Home() {
               <ImageIcons
                 image='/cohete.png'
                 alt="cohete image"
+                size={32}
               />
               <h3 className="text-lg font-bold">Rapid</h3>
               <p className="text-muted-foreground">
@@ -61,6 +27,7 @@ export default function Home() {
               <ImageIcons
                 image='/easy.png'
                 alt="cohete image"
+                size={32}
               />
               <h3 className="text-lg font-bold">Easy to use</h3>
               <p className="text-muted-foreground">
@@ -71,6 +38,7 @@ export default function Home() {
               <ImageIcons
                 image='/secure.png'
                 alt="cohete image"
+                size={32}
               />
               <h3 className="text-lg font-bold">Secure</h3>
               <p className="text-muted-foreground">

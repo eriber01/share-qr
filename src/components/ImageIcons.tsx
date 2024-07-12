@@ -3,14 +3,15 @@ import Image from "next/image"
 interface Props {
   image: string
   alt: string
+  size: number
 }
-export const ImageIcons = ({ alt, image }: Props) => {
+export const ImageIcons = ({ alt, image, size }: Props) => {
   return (
     <div>
       <Image
         src={image}
-        width={32}
-        height={32}
+        width={size}
+        height={size}
         alt={alt}
       />
     </div>
