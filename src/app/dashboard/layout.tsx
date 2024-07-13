@@ -1,18 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
-import { Providers } from "./Providers";
+import { Providers } from "../Providers";
+import { SiderBar } from "@/components/Dashboard/SiderBard";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// const fontHeading = Inter({
-//   subsets: ['latin'],
-//   display: 'swap',
-//   variable: '--font-heading',
-// })
-
 export const metadata: Metadata = {
-  title: "Share QR",
+  title: "Dashboard - Share QR",
   description: "Share information for QR code",
 };
 
@@ -25,6 +19,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
+          <div>
+            <SiderBar />
+          </div>
           {children}
         </Providers>
       </body>

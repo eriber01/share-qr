@@ -1,9 +1,10 @@
 import Image from 'next/image'
 import { ShareButton } from './ShareButton'
+import { QrImage } from '../Qr/QrImage'
 
 export const Home = () => {
   return (
-    <div className='fade-in-15 animate-ping h-screen'>
+    <div className='h-screen'>
       <section className="w-full py-12 md:py-24 lg:py-32 flex justify-center items-center">
         <div className="px-4 md:px-6 w-10/12">
           <div className="grid gap-6 lg:grid-cols-[1fr_550px] lg:gap-12 xl:grid-cols-[1fr_650px]">
@@ -21,13 +22,7 @@ export const Home = () => {
               </div>
             </div>
             <div className="flex flex-col items-center justify-center">
-              <Image
-                src="/qr.png"
-                width="300"
-                height="300"
-                alt="QR Code"
-                className="w-100 aspect-square overflow-hidden rounded-xl object-bottom sm:w-auto lg:order-last lg:aspect-square"
-              />
+              <QrImage />
               {/* <p className="mt-4 text-muted-foreground">Scan to learn more</p> */}
             </div>
           </div>
