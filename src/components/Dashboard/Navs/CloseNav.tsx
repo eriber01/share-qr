@@ -3,11 +3,11 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../
 import Link from 'next/link'
 import { HomeIcon } from '../../ui/HomeIcon'
 import { InboxIcon } from '../../ui/InboxIcon'
-import { CalendarIcon } from '../../ui/CalendarIcon'
 import { FileIcon } from '../../ui/FileIcon'
 import { Button } from '../../ui/button'
 import LogOutIcon from '../../ui/LogOutIcon'
 import { TooltipItem } from './CloseNavItem'
+import { AddQrButtonCloseNav } from '@/components/ui/AddQrButtonCloseNav'
 
 export const CloseNav = () => {
   return (
@@ -30,17 +30,18 @@ export const CloseNav = () => {
               active={true}
             />
             <TooltipItem
-              ico={<CalendarIcon className="h-5 w-5" />}
-              name='Calendar'
-              tooltipText='Calendar'
-              active={false}
-            />
-            <TooltipItem
               ico={<FileIcon className="h-5 w-5" />}
-              name='Share Qr'
-              tooltipText='Share Qr'
+              name='Qr Shared'
+              tooltipText='Qr Shared'
               active={false}
             />
+            {/* <TooltipItem
+              ico={<PlusIcon className="h-5 w-5" />}
+              name='Share a Qr'
+              tooltipText='Share a Qr'
+              active={false}
+            /> */}
+            <AddQrButtonCloseNav />
           </TooltipProvider>
         </nav>
         <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">

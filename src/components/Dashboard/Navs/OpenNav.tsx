@@ -8,6 +8,9 @@ import { InboxIcon } from '../../ui/InboxIcon'
 import { CalendarIcon } from '../../ui/CalendarIcon'
 import LogOutIcon from '../../ui/LogOutIcon'
 import { OpenNavItem } from './OpenNavItem'
+import { FileIcon } from '@/components/ui/FileIcon'
+import { PlusIcon } from '@/components/ui/PlusIcon'
+import { AddQrButtonOpenNav } from '@/components/ui/AddQrButtonOpenNav'
 
 export const OpenNav = () => {
   return (
@@ -32,18 +35,14 @@ export const OpenNav = () => {
                 <OpenNavItem
                   icon={<InboxIcon className="h-5 w-5" />}
                   name='Inbox'
-                  active={true}
-                />
-                <OpenNavItem
-                  icon={<CalendarIcon className="h-5 w-5" />}
-                  name='Calendar'
                   active={false}
                 />
                 <OpenNavItem
-                  icon={<CalendarIcon className="h-5 w-5" />}
-                  name='Share Qr'
+                  icon={<FileIcon className="h-5 w-5" />}
+                  name='Qr Shared'
                   active={false}
                 />
+                <AddQrButtonOpenNav />
               </div>
             </nav>
             <nav className="grid gap-6 text-lg font-medium">

@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Tooltip, TooltipContent, TooltipTrigger } from '../../ui/tooltip'
 import Link from 'next/link'
 
