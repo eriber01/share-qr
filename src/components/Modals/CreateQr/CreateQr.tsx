@@ -1,6 +1,7 @@
 'use client'
-import { FormEvent, useRef, useState } from "react";
-
+import { useRef } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Checkbox,
   Dialog,
@@ -12,35 +13,40 @@ import {
   Typography
 } from "@material-tailwind/react"
 import { Button } from "../../ui/button";
-import { CreateQrI } from "@/types";
-import { INITIAL_STATE } from "./actions";
+import { CreateQrI, schema, toSendQr } from "./actions";
 import { useAppDispatch, useAppSelector } from "@/lib/redux-hooks";
 import { toggleShareQrModal } from "@/lib/features/globalState/globalStateSlice";
+import { CustomInput } from "@/components/ui/CustomInput";
+import { CustomTextArea } from "@/components/ui/CustomTextArea";
 
 export const CreateQr = () => {
+  const {
+    handleSubmit,
+    register,
+    reset,
+    watch,
+    formState: { errors }
+  } = useForm<CreateQrI>({ resolver: zodResolver(schema) })
+
   const { isOpenShareQrModal } = useAppSelector(state => state.globalState)
-  const [state, setState] = useState<CreateQrI>(INITIAL_STATE)
   const dispatch = useAppDispatch()
 
   const formRef = useRef<HTMLFormElement>(null)
 
-  const handleOpen = () => dispatch(toggleShareQrModal(!isOpenShareQrModal));
+  const handleOpen = () => {
+    reset()
+    dispatch(toggleShareQrModal(!isOpenShareQrModal))
+  };
 
-  const onChange = (path: keyof CreateQrI, value: string | boolean) => {
-    setState(prev => ({
-      ...prev,
-      [path]: value
-    }))
+  const handledSubmit = async (data: CreateQrI) => {
+    // e.preventDefault();
+    // await toSendQr(state)
+
+    console.log(data);
+
   }
 
-  console.log(state);
-
-  const handledSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(state);
-  }
-
-  const onClick = () => {
+  const onSubmit = () => {
     if (formRef.current) {
       formRef.current.requestSubmit()
     }
@@ -64,18 +70,15 @@ export const CreateQr = () => {
         </DialogHeader>
         <DialogBody>
           <div>
-            <form ref={formRef} onSubmit={handledSubmit}>
+            <form ref={formRef} onSubmit={handleSubmit(handledSubmit)}>
               <div className="flex w-full flex-wrap items-center justify-between">
                 <div className="w-[70%]">
-                  <Input
-                    crossOrigin={''}
+                  <CustomInput
+                    error={errors?.emailSend?.message}
+                    register={register}
                     label="Send to..."
-                    type="email"
-                    id="email"
-                    error={false}
-                    success={true}
-                    value={state.emailSend}
-                    onChange={({ target: { value } }) => onChange('emailSend', value)}
+                    name="emailSend"
+                    watch={watch}
                   />
                 </div>
 
@@ -83,22 +86,20 @@ export const CreateQr = () => {
                   crossOrigin={''}
                   className="rounded-xl bg-transparent p-0 m-0"
                   color="blue"
+                  id="isOneView"
                   label="Only one view"
-                  checked={state.isOneView}
-                  onChange={({ target: { checked } }) => onChange('isOneView', checked)}
+                  {...register('isOneView')}
                 />
 
               </div>
-              <div className="mb-4" />
-              <Textarea
+              <div className="mb-3" />
+              <CustomTextArea
                 label="Message"
-                resize
-                error={false}
-                success={true}
-                value={state.message}
-                onChange={({ target: { value } }) => onChange('message', value)}
+                name="message"
+                error={errors.message?.message}
+                register={register}
+                watch={watch}
               />
-
             </form>
           </div>
         </DialogBody>
@@ -111,7 +112,7 @@ export const CreateQr = () => {
           >
             <span>Cancel</span>
           </Button>
-          <Button variant="purple" color="green" onClick={onClick}>
+          <Button type="submit" variant="purple" color="green" onClick={onSubmit}>
             <span>Share</span>
           </Button>
         </DialogFooter>
