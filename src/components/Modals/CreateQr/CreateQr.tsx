@@ -39,11 +39,7 @@ export const CreateQr = () => {
   };
 
   const handledSubmit = async (data: CreateQrI) => {
-    // e.preventDefault();
-    // await toSendQr(state)
-
-    console.log(data);
-
+    await toSendQr(data)
   }
 
   const onSubmit = () => {

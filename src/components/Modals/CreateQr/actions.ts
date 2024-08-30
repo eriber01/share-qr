@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { z } from "zod";
 
 export const schema = z.object({
@@ -8,9 +9,10 @@ export const schema = z.object({
 
 export type CreateQrI = z.infer<typeof schema>
 
-export const toSendQr = async (state: CreateQrI) => {
+export const toSendQr = async (data: CreateQrI) => {
   try {
-    const validate = schema.safeParse(schema)
+    console.log(data);
+    toast.success('hola')
   } catch (error) {
     console.log(error);
   }

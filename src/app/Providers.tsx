@@ -1,6 +1,6 @@
 'use client'
+import { Toaster } from "react-hot-toast";
 import { PropsWithChildren } from "react"
-
 import { useRef } from 'react'
 import { Provider } from 'react-redux'
 import { makeStore, AppStore } from '../lib/store'
@@ -12,5 +12,10 @@ export const Providers = ({ children }: PropsWithChildren) => {
     storeRef.current = makeStore()
   }
 
-  return <Provider store={storeRef.current}>{children}</Provider>
+  return <Provider store={storeRef.current}>
+    <Toaster
+      containerStyle={{ zIndex: 10000 }}
+    />
+    {children}
+  </Provider>
 }
