@@ -1,6 +1,5 @@
 'use client'
 import Link from 'next/link'
-import { Button } from '@material-tailwind/react'
 
 export const ShareButton = () => {
   return (

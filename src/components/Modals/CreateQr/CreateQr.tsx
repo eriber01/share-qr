@@ -14,8 +14,8 @@ import {
 } from "@material-tailwind/react"
 import { Button } from "../../ui/button";
 import { CreateQrI, schema, toSendQr } from "./actions";
-import { useAppDispatch, useAppSelector } from "@/lib/redux-hooks";
-import { toggleShareQrModal } from "@/lib/features/globalState/globalStateSlice";
+import { useAppDispatch, useAppSelector } from "@/store/redux-hooks";
+import { toggleShareQrModal } from "@/store/features/globalState/globalStateSlice";
 import { CustomInput } from "@/components/ui/CustomInput";
 import { CustomTextArea } from "@/components/ui/CustomTextArea";
 

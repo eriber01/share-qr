@@ -1,4 +1,4 @@
-import Image from 'next/image'
+
 import { ShareButton } from './ShareButton'
 import { QrImage } from '../Qr/QrImage'
 

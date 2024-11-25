@@ -14,32 +14,42 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  username  String
-  email     String
-  enabled   Boolean
-  shares    Shares[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         Int          @id @default(autoincrement())
+  firstName  String
+  lastName   String
+  userId     String       @unique
+  username   String
+  email      String
+  enabled    Boolean
+  shares     Shares[]
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  userEmails UserEmails[]
+}
+
+model UserEmails {
+  id           String @unique
+  emailAddress String
+  userId       String
+  user         User   @relation(fields: [userId], references: [userId])
 }
 
 model Shares {
-  id         Int          @id @default(autoincrement())
-  user       User         @relation(fields: [userId], references: [id])
-  userId     Int
-  emailSend  String
-  date       DateTime
-  isEnd      Boolean
-  endDate    DateTime
-  codeAccess String
+  id              Int          @id @default(autoincrement())
+  user            User         @relation(fields: [userId], references: [id])
+  userId          Int
+  emailSend       String
+  date            DateTime
+  isEnd           Boolean
+  endDate         DateTime
+  codeAccess      String
   isAccessForCode String
-  codeQr     String
-  isOneView  Boolean
-  isView     Boolean
-  sharesData SharesData[]
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
+  codeQr          String
+  isOneView       Boolean
+  isView          Boolean
+  sharesData      SharesData[]
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
 }
 
 model SharesData {

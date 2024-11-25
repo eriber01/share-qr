@@ -1,8 +1,8 @@
 'use client'
-import { useAppDispatch } from '@/lib/redux-hooks'
+import { useAppDispatch } from '@/store/redux-hooks'
 import { Button } from './button'
 import { PlusIcon } from './PlusIcon'
-import { toggleShareQrModal } from '@/lib/features/globalState/globalStateSlice'
+import { toggleShareQrModal } from '@/store/features/globalState/globalStateSlice'
 import { TooltipItem } from '../Dashboard/Navs/CloseNavItem'
 
 export const AddQrButtonCloseNav = () => {

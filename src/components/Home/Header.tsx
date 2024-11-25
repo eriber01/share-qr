@@ -6,8 +6,13 @@ import { SignInButton, SignOutButton, useAuth } from '@clerk/nextjs'
 import { Button } from '../ui/button'
 
 export const Header = () => {
-  const { userId } = useAuth()
+  const { userId, getToken } = useAuth()
+  const fetchToken = async () => {
+    const token = await getToken();
+    console.log('Token:', token);
+  };
 
+  fetchToken()
   return (
     <>
       <header className="flex items-center justify-between px-4 md:px-6 h-14 bg-background">
