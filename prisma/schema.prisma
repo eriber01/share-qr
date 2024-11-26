@@ -19,7 +19,6 @@ model User {
   lastName   String
   userId     String       @unique
   username   String
-  email      String
   enabled    Boolean
   shares     Shares[]
   createdAt  DateTime     @default(now())
