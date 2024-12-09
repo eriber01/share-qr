@@ -6,13 +6,8 @@ import { SignInButton, SignOutButton, useAuth } from '@clerk/nextjs'
 import { Button } from '../ui/button'
 
 export const Header = () => {
-  const { userId, getToken } = useAuth()
-  const fetchToken = async () => {
-    const token = await getToken();
-    console.log('Token:', token);
-  };
+  const { userId } = useAuth()
 
-  fetchToken()
   return (
     <>
       <header className="flex items-center justify-between px-4 md:px-6 h-14 bg-background">
@@ -23,13 +18,6 @@ export const Header = () => {
             size={32}
           />
         </Link>
-        {/* <Link
-          href="#"
-          className="inline-flex h-9 items-center justify-center rounded-md bg-[#8B5CF6] px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-[#7C3AED] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-          prefetch={false}
-        >
-          Login
-        </Link> */}
 
         {
           userId ?

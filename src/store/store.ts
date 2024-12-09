@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import globalStateReducer from './features/globalState/globalStateSlice'
+import userSlice from './features/user/userSlice'
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      globalState: globalStateReducer
+      globalState: globalStateReducer,
+      user: userSlice
     },
   })
 }

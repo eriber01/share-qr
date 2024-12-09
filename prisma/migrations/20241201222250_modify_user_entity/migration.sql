@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "username" DROP NOT NULL,
+ALTER COLUMN "username" SET DEFAULT 'null',
+ALTER COLUMN "enabled" DROP NOT NULL,
+ALTER COLUMN "enabled" SET DEFAULT true;

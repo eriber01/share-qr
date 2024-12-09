@@ -18,8 +18,8 @@ model User {
   firstName  String
   lastName   String
   userId     String       @unique
-  username   String
-  enabled    Boolean
+  username   String?      @default("null")
+  enabled    Boolean?     @default(true)
   shares     Shares[]
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
