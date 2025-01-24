@@ -1,16 +1,15 @@
 'use client'
-import { useAppDispatch } from '@/store/redux-hooks'
+import { useGlobalStore } from '@/hooks/stores/useGlobalStore'
 import { Button } from './button'
 import { PlusIcon } from './PlusIcon'
-import { toggleShareQrModal } from '@/store/features/globalState/globalStateSlice'
 
 export const AddQrButton = () => {
-  const dispatch = useAppDispatch()
+  const { toggleShareQrModal } = useGlobalStore()
   return (
     <Button
       variant="primary"
       className="w-full max-w-[200px] mx-auto shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
-      onClick={() => dispatch(toggleShareQrModal(true))}
+      onClick={() => toggleShareQrModal()}
     >
       <PlusIcon className="h-5 w-5 mr-2" />
       <span className='font-bold text-base'>

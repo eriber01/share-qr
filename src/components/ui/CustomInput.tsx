@@ -22,7 +22,7 @@ export const CustomInput = ({ error, name, label, register, watch }: Props) => {
         error={error ? true : false}
         success={watch(name) && !error ? true : false}
       />
-      {error ? <Typography color="red">{error}</Typography> : <Typography color="red" className="opacity-0">{'.'}</Typography>}
+      {error && <Typography color="red">{error}</Typography>}
     </>
   )
 }

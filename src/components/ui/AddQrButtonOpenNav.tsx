@@ -1,19 +1,17 @@
 'use client'
-import { useAppDispatch } from '@/store/redux-hooks'
+import { useGlobalStore } from '@/hooks/stores/useGlobalStore'
 import { Button } from './button'
 import { PlusIcon } from './PlusIcon'
-import { toggleShareQrModal } from '@/store/features/globalState/globalStateSlice'
-import { OpenNavItem } from '../Dashboard/Navs/OpenNavItem'
 import { SheetTrigger } from './sheet'
 
 export const AddQrButtonOpenNav = () => {
-  const dispatch = useAppDispatch()
+  const { toggleShareQrModal } = useGlobalStore()
 
   return (
     <SheetTrigger asChild className='w-full'>
       <Button
         className={`w-full bg-transparent px-2.5 py-1 gap-4 hover:text-foreground hover:bg-accent text-black rounded-sm ${true ? 'bg-accent' : 'text-white'}`}
-        onClick={() => dispatch(toggleShareQrModal(true))}
+        onClick={() => toggleShareQrModal()}
       >
         <div className='w-full text-lg flex items-center gap-4'>
           <PlusIcon className="h-5 w-5" />

@@ -1,5 +1,5 @@
 export interface CreateQrI {
   emailSend: string
-  isOneView: boolean
+  oneView: boolean
   message: string
 }

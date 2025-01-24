@@ -1,14 +1,12 @@
 'use client'
-import { useAppDispatch } from '@/store/redux-hooks'
-import { Button } from './button'
 import { PlusIcon } from './PlusIcon'
-import { toggleShareQrModal } from '@/store/features/globalState/globalStateSlice'
 import { TooltipItem } from '../Dashboard/Navs/CloseNavItem'
+import { useGlobalStore } from '@/hooks/stores/useGlobalStore'
 
 export const AddQrButtonCloseNav = () => {
-  const dispatch = useAppDispatch()
+  const { toggleShareQrModal } = useGlobalStore()
   return (
-    <button onClick={() => dispatch(toggleShareQrModal(true))}>
+    <button onClick={() => toggleShareQrModal()}>
       <TooltipItem
         ico={<PlusIcon className="h-5 w-5" />}
         name='Share a Qr'

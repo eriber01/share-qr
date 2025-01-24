@@ -9,15 +9,16 @@ interface Props {
   label: string
   error: string | undefined
   watch: UseFormWatch<any>
+  resize?: boolean
 }
 
-export const CustomTextArea = ({error, label, name, register, watch}:Props) => {
+export const CustomTextArea = ({ error, label, name, register, watch, resize = true }: Props) => {
   return (
     <>
       <Textarea
         label={label}
         id={name}
-        resize
+        resize={resize}
         {...register(name)}
         error={error ? true : false}
         success={watch(name) && !error ? true : false}

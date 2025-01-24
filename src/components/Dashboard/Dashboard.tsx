@@ -3,11 +3,20 @@ import { DashboardCard } from './DashboardCard'
 import { FileIcon } from '../ui/FileIcon'
 import { AddQrButton } from '../ui/AddQrButton'
 import { CreateQr } from '../Modals/CreateQr/CreateQr'
+import { getCurrentUser } from '@/services/getCurrentUser'
 
-const Dashboard = () => {
+const fetchUser = async () => {
+  const { user } = await getCurrentUser()
+  return user
+}
+
+const Dashboard = async () => {
+
+  const user = await fetchUser()
+
   return (
     <main className="flex-1 p-4 min-h-screen min min-w-full">
-      <CreateQr />
+      <CreateQr user={user}/>
       <div className="grid gap-4">
         <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
         <p className="text-muted-foreground">

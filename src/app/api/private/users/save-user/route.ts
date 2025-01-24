@@ -1,18 +1,12 @@
 import { currentUser } from "@clerk/nextjs/server";
 import prisma from '../../../../../services/prisma';
-import { User } from "@prisma/client";
+import { getCurrentUser } from "@/services/getCurrentUser";
 
 export async function PUT() {
 
   try {
 
-    const userClerk = await currentUser()
-
-    if (!userClerk) {
-      return Response.json({ message: 'No found a User' }, { status: 500 })
-    }
-
-    const user = await prisma.user.findFirst({ where: { userId: userClerk.id } })
+    const { user, userClerk } = await getCurrentUser()
 
     if (user) {
       return Response.json({ user }, { status: 200 })

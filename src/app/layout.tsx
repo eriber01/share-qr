@@ -5,6 +5,7 @@ import { Providers } from "./Providers";
 import {
   ClerkProvider
 } from '@clerk/nextjs'
+import 'flatpickr/dist/themes/material_blue.css';
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -34,29 +34,33 @@ model UserEmails {
 }
 
 model Shares {
-  id              Int          @id @default(autoincrement())
-  user            User         @relation(fields: [userId], references: [id])
-  userId          Int
-  emailSend       String
-  date            DateTime
-  isEnd           Boolean
-  endDate         DateTime
-  codeAccess      String
-  isAccessForCode String
-  codeQr          String
-  isOneView       Boolean
-  isView          Boolean
-  sharesData      SharesData[]
-  createdAt       DateTime     @default(now())
-  updatedAt       DateTime     @updatedAt
+  id           Int            @id @default(autoincrement())
+  user         User           @relation(fields: [userId], references: [id])
+  userId       Int
+  isDue        Boolean        @default(false)
+  endDate      DateTime?      @db.Date
+  needCode     Boolean        @default(false)
+  codeAccess   String?        @default("null")
+  oneView      Boolean        @default(false)
+  sharesData   SharesData[]
+  sharesEmails SharesEmails[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
 }
 
 model SharesData {
-  id         Int      @id @default(autoincrement())
-  sharesId   Int      @unique
-  sharesData Shares   @relation(fields: [sharesId], references: [id])
-  data       String
-  date       DateTime
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  sharesId  Int
+  shares    Shares   @relation(fields: [sharesId], references: [id])
+  data      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SharesEmails {
+  id       Int      @id @default(autoincrement())
+  email    String
+  sharesId Int
+  shares   Shares   @relation(fields: [sharesId], references: [id])
+  isView   Boolean? @default(false)
 }

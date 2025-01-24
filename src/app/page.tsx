@@ -8,27 +8,25 @@ import { Header } from "@/components/Home/Header";
 import { useClerk } from "@clerk/nextjs";
 import { privateRoutes } from "@/utils/apiUrlBase";
 import { User } from "@prisma/client";
-import { useAppDispatch } from "@/store/redux-hooks";
-import { setUser } from "@/store/features/user/userSlice";
+import { useUserStore } from "@/hooks/stores/useUserStore";
 
 export default function HomePage() {
   const { addListener } = useClerk();
   const previousSessionId = useRef<string | null | undefined>(null);
-  const dispatch = useAppDispatch()
+  const { setUser } = useUserStore()
 
-  
   useEffect(() => {
     const listener = addListener(async event => {
       if (event.session?.id !== previousSessionId.current) {
         previousSessionId.current = event.session?.id;
         if (event.session) {
           const { data } = await privateRoutes.put<{ user: User | null }>('users/save-user')
-          dispatch(setUser({ user: data.user }))
+          data.user && setUser(data.user)
         }
       }
     })
     return () => listener()
-  }, [addListener, dispatch])
+  }, [addListener, setUser])
 
   return (
     <div className="flex flex-col min-h-dvh">
