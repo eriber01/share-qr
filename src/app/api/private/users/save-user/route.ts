@@ -19,7 +19,7 @@ export async function PUT() {
         lastName: userClerk.lastName!,
         userEmails: {
           create: userClerk.emailAddresses.map(item => ({
-            id: item.id,
+            emailId: item.id,
             emailAddress: item.emailAddress
           }))
         }
@@ -29,6 +29,7 @@ export async function PUT() {
     return Response.json({ user: createUser }, { status: 200 })
 
   } catch (error) {
+    console.log({ error });
     return Response.json({ error }, { status: 500 })
   }
 }

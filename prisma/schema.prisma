@@ -27,7 +27,8 @@ model User {
 }
 
 model UserEmails {
-  id           String @unique
+  id           Int    @id @default(autoincrement())
+  emailId      String @unique
   emailAddress String
   userId       String
   user         User   @relation(fields: [userId], references: [userId])
@@ -58,9 +59,9 @@ model SharesData {
 }
 
 model SharesEmails {
-  id       Int      @id @default(autoincrement())
+  id       Int     @id @default(autoincrement())
   email    String
   sharesId Int
-  shares   Shares   @relation(fields: [sharesId], references: [id])
-  isView   Boolean? @default(false)
+  shares   Shares  @relation(fields: [sharesId], references: [id])
+  isView   Boolean @default(false)
 }
