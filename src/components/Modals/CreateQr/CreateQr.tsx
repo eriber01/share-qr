@@ -1,4 +1,5 @@
 'use client'
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -16,14 +17,21 @@ import { CustomTextArea } from "@/components/ui/CustomTextArea";
 import Flatpickr from 'react-flatpickr';
 import { useUserStore } from "@/hooks/stores/useUserStore";
 import { useGlobalStore } from "@/hooks/stores/useGlobalStore";
-import { User } from "@prisma/client";
-import { useEffect } from "react";
+import { Shares, User } from "@prisma/client";
+import { QrModal } from "../QrModal";
 
 interface Props {
   user: User | null
 }
 
+interface PropsState {
+  isOpen: boolean
+  share: Shares | null
+}
+
 export const CreateQr = ({ user }: Props) => {
+  const [state, setState] = useState<PropsState>({ isOpen: true, share: null })
+
   const {
     handleSubmit,
     register,
@@ -42,9 +50,15 @@ export const CreateQr = ({ user }: Props) => {
   };
 
   const handledSubmit = async (data: CreateQrI) => {
+    console.log('va a enviar', user);
+
     if (user) {
-      await toSendQr(data, user)
+      console.log('tiene ususario');
+
+      const share = await toSendQr(data, user)
+      console.log(share);
       handleOpen()
+      setState({ isOpen: true, share })
     }
   }
 
@@ -54,11 +68,14 @@ export const CreateQr = ({ user }: Props) => {
     }
   }, [setUser, user])
 
-  console.log(watch('endDate'));
-
+  console.log(state);
 
   return (
     <div>
+      {
+        // state.share &&
+        <QrModal isOpen={state.isOpen} urlId={state.share?.urlId || 'asjdgasjhgdjahsgd'} />
+      }
       <Dialog
         open={isOpenShareQrModal}
         handler={handleOpen}
@@ -73,7 +90,7 @@ export const CreateQr = ({ user }: Props) => {
         <DialogHeader>
           <div>
             Share a Qr.
-            <Typography>Share text or link width a friend</Typography>
+            <Typography>Share text or link with a friend</Typography>
           </div>
         </DialogHeader>
         <div>
@@ -131,7 +148,6 @@ export const CreateQr = ({ user }: Props) => {
                         dateFormat: 'Y-m-d',
                         minDate: 'today',
                         disableMobile: true,
-                        
                       }}
                       placeholder="Select a date"
                       className={`

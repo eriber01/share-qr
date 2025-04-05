@@ -1,16 +1,31 @@
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import React from 'react'
+import QrCode from 'qrcode'
 
-export const QrImage = () => {
+export const QrImage = ({ urlId }: { urlId: string | null }) => {
+  const [qr, setQr] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (urlId) {
+      const url = process.env.NEXT_PUBLIC_APP_URL
+      QrCode.toDataURL(`${url}/${urlId}`, { width: 800 }).then((url) => {
+        setQr(url)
+      })
+    }
+  }, [qr, urlId])
+
   return (
     <>
-      <Image
-        src="/qr.png"
-        width="300"
-        height="300"
-        alt="QR Code"
-        className="w-100 aspect-square overflow-hidden rounded-xl object-bottom sm:w-auto lg:order-last lg:aspect-square"
-      />
+      {
+        qr && <Image
+          id="qr-image"
+          className='mt-2 rounded-lg shadow'
+          src={qr}
+          alt='Qr'
+          width={300}
+          height={300}
+        />
+      }
     </>
   )
 }

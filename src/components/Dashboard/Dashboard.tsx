@@ -16,7 +16,7 @@ const Dashboard = async () => {
 
   return (
     <main className="flex-1 p-4 min-h-screen min min-w-full">
-      <CreateQr user={user}/>
+      <CreateQr user={user} />
       <div className="grid gap-4">
         <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
         <p className="text-muted-foreground">

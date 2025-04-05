@@ -1,7 +1,7 @@
 import { privateRoutes } from "@/utils/apiUrlBase";
 import toast from "react-hot-toast";
 import { z } from "zod";
-import { User } from "@prisma/client";
+import { Shares, User } from "@prisma/client";
 
 export const schema = z.object({
   emailSend: z.string({ message: 'Email send to is required' }).min(1, { message: 'Email send to is required' }).email({ message: "Invalid email address" }),
@@ -31,11 +31,16 @@ export const schema = z.object({
 
 export type CreateQrI = z.infer<typeof schema>
 
-export const toSendQr = async (data: CreateQrI, user: User) => {
+export const toSendQr = async (data: CreateQrI, user: User): Promise<Shares | null> => {
   try {
+    console.log('entrop');
+
+    let resShare: Shares | null = null
     const sendQr = async () => {
-      const { data: share } = await privateRoutes.put('qr-code', { data, user })
-      console.log({ share });
+      const { data: shareData } = await privateRoutes.put('qr-code', { data, user })
+      console.log(shareData);
+      const { share } = shareData
+      resShare = share
     }
 
     console.log({ data, user });
@@ -44,13 +49,15 @@ export const toSendQr = async (data: CreateQrI, user: User) => {
       {
         loading: 'Sending Qr...',
         success: () => {
-
           return 'Qr send successfully'
         },
         error: 'Error to send Qr',
       }
     );
+
+    return resShare
   } catch (error) {
     console.log(error);
+    return null
   }
 }

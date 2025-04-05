@@ -45,6 +45,7 @@ model Shares {
   oneView      Boolean        @default(false)
   sharesData   SharesData[]
   sharesEmails SharesEmails[]
+  urlId        String         @unique
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
 }
