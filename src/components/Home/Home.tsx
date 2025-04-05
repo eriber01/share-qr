@@ -22,7 +22,7 @@ export const Home = () => {
               </div>
             </div>
             <div className="flex flex-col items-center justify-center">
-              <QrImage />
+              <QrImage urlId={'dashboard'} />
               {/* <p className="mt-4 text-muted-foreground">Scan to learn more</p> */}
             </div>
           </div>
